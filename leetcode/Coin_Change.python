@@ -1,0 +1,29 @@
+class Solution(object):
+    def rec(self,i,amount,dp,coins):
+        if amount==0:
+            return 0
+
+        if (i,amount) in dp:
+            return dp[(i,amount)]
+        
+        if amount<0:
+            return float('inf')
+        
+        if i>=len(coins):
+            return float('inf')
+        rec1=self.rec(i+1,amount,dp,coins)
+        rec2=1+self.rec(i,amount-coins[i],dp,coins) 
+
+        ans=min(rec1,rec2)
+        dp[(i,amount)]=ans
+        return ans
+
+    def coinChange(self, coins, amount):
+        if amount==0:
+            return 0 
+        
+        dp={}
+        ans=self.rec(0,amount,dp,coins)
+        if ans==float('inf'):
+            return -1
+        return ans
