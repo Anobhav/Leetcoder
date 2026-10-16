@@ -1,0 +1,24 @@
+class Solution(object):
+    def lastStoneWeightII(self, stones):
+        tsum=0
+
+        for n in stones:
+            tsum+=n
+        
+        target=tsum//2
+
+        dp=[False]*(target+1)
+        dp[0]=True
+        for n in stones:
+            for i in range(len(dp)-1,-1,-1):
+                if i<n:
+                    break
+                if dp[i-n]:
+                    dp[i]=True
+        for i in range(target, -1, -1):
+            if dp[i]:
+                best = i
+                break
+
+        return tsum - 2 * best
+
