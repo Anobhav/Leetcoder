@@ -21,4 +21,4 @@ class Solution(object):
                 break
 
         return tsum - 2 * best
-
+# basic idea = we want 2 subsets with there sums difference being the minimum 
