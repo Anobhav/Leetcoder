@@ -1,0 +1,23 @@
+class Solution(object):
+    def findTargetSumWays(self, nums, target):
+        dp={}
+        def rec(i,target):
+            if i==len(nums):
+                if target==0:
+                    return 1
+                else:
+                    return 0
+
+            if (i,target) in dp:
+                return dp[(i,target)]
+            
+            w1=rec(i+1,target-nums[i])
+            w2=rec(i+1,target+nums[i])
+
+            w=w1+w2
+
+            dp[(i,target)]=w
+            return w
+
+        return (rec(0,target))
+        
