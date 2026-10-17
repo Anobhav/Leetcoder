@@ -1,0 +1,24 @@
+class Solution(object):
+    def change(self, amount, coins):
+        dp={}
+        def rec(i,amount):
+            if amount==0:
+                return 1
+            if i == len(coins):
+                return 0
+            if amount < 0:
+                return 0
+            
+            if(i,amount) in dp:
+                return dp[(i,amount)]
+
+            r1=rec(i+1,amount)
+            r2=rec(i,amount-coins[i])
+
+            ways=r1+r2
+            dp[(i, amount)] = ways
+
+            return ways
+        
+        return(rec(0,amount))
+        
