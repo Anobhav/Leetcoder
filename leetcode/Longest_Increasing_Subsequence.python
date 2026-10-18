@@ -1,0 +1,22 @@
+class Solution(object):
+    def lengthOfLIS(self, nums):
+        tail = []
+
+        for num in nums:
+            low = 0
+            high = len(tail) - 1
+
+            while low <= high:
+                mid = (low + high) // 2
+
+                if tail[mid] < num:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+
+            if low == len(tail):
+                tail.append(num)
+            else:
+                tail[low] = num
+
+        return len(tail)
