@@ -1,0 +1,25 @@
+class Solution(object):
+    def minDistance(self, word1, word2):
+        dp = {}
+
+        def rec(i, j):
+            if i == len(word1):
+                return len(word2) - j
+            if j == len(word2):
+                return len(word1) - i
+
+            if (i, j) in dp:
+                return dp[(i, j)]
+            if word1[i] == word2[j]:
+                dp[(i, j)] = rec(i + 1, j + 1)
+
+            else:
+                insert = rec(i, j + 1)
+                delete = rec(i + 1, j)
+                replace = rec(i + 1, j + 1)
+
+                dp[(i, j)] = 1 + min(insert, delete, replace)
+
+            return dp[(i, j)]
+
+        return rec(0, 0)
