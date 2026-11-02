@@ -1,0 +1,23 @@
+class Solution(object):
+    def combinationSum4(self, nums, target):
+        memo = {}
+
+        def rec(target):
+            if target in memo:
+                return memo[target]
+
+            if target == 0:
+                return 1
+
+            if target < 0:
+                return 0
+
+            count = 0
+
+            for num in nums:
+                count += rec(target - num)
+
+            memo[target] = count
+            return count
+
+        return rec(target)
